@@ -1,0 +1,159 @@
+<program>                       ::= program identificador ';' [<declaracoes_globais>] [<blocos>] <bloco_main>
+
+<declaracoes_globais>           ::= <declaracoes_globais> <declaracao_global>
+
+<declaracao_global>             ::= <declarar_variaveis_globais> 
+                                |   <declarar_constantes_globais>
+								
+<declarar_variaveis_globais>    ::= declare identificador : tipo ;
+                                |   declare identificador : op_atribuicao <expressao_numerica>
+								|   declare identificador : op_atribuicao <expressao_literal>
+								|   declare identificador : op_atribuicao binario
+								|   declare identificador : op_atribuicao
+								|   <declaracao_multipla>
+								
+<expressao_numerica>            ::= numero
+                                |   identificador
+								|   <operacao>
+								|   ( <expressao_numerica> )
+								
+<operacao>                      ::= <expressao_numerica> op_divisao <expressao_numerica>
+                                |   <expressao_numerica> op_modulo <expressao_numerica>
+								|   <expressao_numerica> op_multiplicacao <expressao_numerica>
+								|   <expressao_numerica> op_subtracao <expressao_numerica>
+								|   <expressao_numerica> op_soma <expressao_numerica>
+		
+<expressao_literal>             ::= texto
+                                |   caracter
+								|   identificador
+								|   expressao_literal op_concatenacao <exps_literal>
+								| ( <expressao_literal> )
+								
+<exps_literal>                  ::= texto
+                                |   caracter
+								|   identificador
+								
+<declaracao_multipla>           ::= declare <lista_identificadores> : tipo ;
+
+<lista_identificadores>         ::= identificador [<lista_idents>]
+
+<lista_idents>                  ::= , identificador <lista_idents>
+
+<declarar_constantes_globais>   ::= declare constant identificador : tipo op_atribuicao <expressao_numerica> ;
+                                |   declare constant identificador : tipo op_atribuicao <expressao_literal> ;
+								|   declare constant identificador : tipo op_atribuicao binario ;
+
+<blocos>                        ::= <blocos> <bloco>
+
+<bloco>                         ::= function identificador ( [<parametros>] ) : tipo [<declaracoes_locais>] end_function
+								|   procedure identificador ( [<parametros>] ) [<declaracoes_locais>] end_procedure
+								
+<parametros>                    ::= <parametros> <parametro>
+
+<parametro>                     ::= identificador : tipo
+                                |   <parametro> , <outros_parametros>
+								
+<outros_parametros>             ::= identificador : tipo
+
+<declaracoes_locais>            ::=  <declaracoes_locais> <declaracao_local>
+
+<declaracao_local>              ::= <declarar_variaveis_locais>
+                                |   <declarar_constantes_locais>
+								|   <declaracao_if>
+								|   <declaracao_while>
+								|   <declaracao_for>
+								|   <atribuir_dado>
+								|   <chamar_bloco>
+								|   <chamar_print>
+								|   <chamar_read>
+								|   <chamar_exit>
+								|   <declarar_saltos>
+							
+<declarar_variaveis_locais>     ::= declare identificador : tipo ;
+                                |   declare : tipo op_atribuicao <expressao_numerica> ;
+								|   declare : tipo op_atribuicao <expressao_literal> ;
+								|   declare : tipo op_atribuicao binario ;
+								|   declare : tipo op_atribuicao <chamar_bloco>
+								|   declare : tipo op_atribuicao <chamar_read>
+								|   <declaracao_multipla>
+
+<chamar_bloco>                  ::= identificador ( [<argumentos>] ) ;
+
+<argumentos>                    ::= <argumentos> <argumento>
+
+<argumento>                     ::= <expressao_literal>
+                                |   <expressao_numerica>
+								|   binario
+								|   identificador ( [<argumentos>] )
+								|   <argumento> , <outros_argumentos>
+								
+<outros_argumentos>             ::= <expressao_literal>
+                                |   <expressao_numerica>
+								|   binario
+								|   identificador ( [<argumentos>]
+								
+<chamar_print>                  ::= print ( <expressao_comparacao> ) ;	
+                                |   print ( <expressao_literal> ) ;	
+								|   print ( <expressao_numerica> ) ;
+								|   print ( binario ) ;
+								|   print ( identificador ( [<argumentos>] ) ) ;
+								
+<expressao_comparacao>          ::= <expressao_numerica> op_diferente <expressao_numerica>
+                                |   <expressao_numerica> op_maiorigualque <expressao_numerica>
+								|   <expressao_numerica> op_maiorque <expressao_numerica>
+								|   <expressao_numerica> op_menorigualque <expressao_numerica>
+								|   <expressao_numerica> op_menorque <expressao_numerica>
+								|   <expressao_numerica> op_igual <expressao_numerica>
+								|   <expressao_comparacao> op_and <exps_comparacao>
+								|   <expressao_comparacao> op_or <exps_comparacao>
+								|   ( <expressao_comparacao> )
+								
+<exps_comparacao>               ::= <expressao_numerica> op_diferente <expressao_numerica>
+                                |   <expressao_numerica> op_maiorigualque <expressao_numerica>
+								|   <expressao_numerica> op_maiorque <expressao_numerica>
+								|   <expressao_numerica> op_menorigualque <expressao_numerica>
+								|   <expressao_numerica> op_menorque <expressao_numerica>
+								|   <expressao_numerica> op_igual <expressao_numerica>
+								|   ( <exps_comparacao> )
+
+<chamar_read>                   ::= read ( ) ;
+
+<chamar_exit>                   ::= exit ( ) ;
+
+<declarar_saltos>               ::= continue ;
+                                |   break ;
+								|	retorno
+								
+<retorno>						::= produce <expressao_numerica> ;
+								|	produce <expressao_literal> ;
+								|	produce binario ;
+								|	produce <chamar_bloco>
+								
+<declarar_constantes_locais>    ::= declare constant identificador : tipo op_atribuicao <expressao_numerica> ;
+                                |   declare constant identificador : tipo op_atribuicao <expressao_literal> ;
+								|   declare constant identificador : tipo op_atribuicao binario ;
+								|   declare constant identificador : tipo op_atribuicao <chamar_bloco> 
+								|   declare constant identificador : tipo op_atribuicao <chamar_read> ;
+		
+<declaracao_if>                 ::= if ( <expressao_comparacao> ) then <declaracoes_locais> end_if
+                                |   if ( <expressao_comparacao> ) then <declaracoes_locais> else <declaracoes_locais> end_if
+	
+<declaracao_while>              ::= while ( <expressao_comparacao> ) declaracoes_locais end_while
+
+<declaracao_for>                ::= for ( <expr_inicializacao> ; <expressao_comparacao> ; <expr_dec_inc> ) <declaracoes_locais> end_for
+
+<expr_inicializacao>            ::= identificador op_atribuicao <expressao_numerica>
+                                |   declare identificador : tipo op_atribuicao <expressao_numerica>
+
+<expr_dec_inc>                  ::= identificador op_inc
+                                |   op_inc identificador
+								|   identificador op_dec
+								|   op_dec identificador
+	
+<atribuir_dado>                 ::= identificador op_atribuicao <expressao_literal> ;
+                                |   identificador op_atribuicao <expressao_numerica> ;
+								|   identificador op_atribuicao binario ;
+								|   identificador op_atribuicao <chamar_bloco>
+								|   identificador op_atribuicao <chamar_read>
+								
+<bloco_main>                    ::= procedure main (  ) <declaracoes_locais> end_procedure

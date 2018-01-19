@@ -1,0 +1,116 @@
+
+%{
+	#include <stdio.h>
+	#include <string.h>
+	#include "parser.tab.h"
+	#include "common.h"
+	int column = 0;
+	int line = 0;
+	void countcolumn();
+	void countline();
+%}
+
+%option case-insensitive
+
+%%
+"//"[^\n]*  { ; }
+"("			{ countcolumn(); return '('; }
+")"			{ countcolumn(); return ')'; }
+":"			{ countcolumn(); return ':'; }
+","			{ countcolumn(); return ','; }
+";"			{ countcolumn(); return ';'; }
+[\v\f\t\r ]+ 	{ countcolumn(); ; }
+[\n] 		{ countline(); ; }
+
+":="	{ countcolumn(); return OP_ATRIBUICAO; }
+
+"/"		{ countcolumn(); return OP_DIVISAO; }
+"module"	{ countcolumn(); return OP_MODULO; }
+"*"		{ countcolumn(); return OP_MULTIPLICACAO; }
+"+"		{ countcolumn(); return OP_SOMA; }
+"-"		{ countcolumn(); return OP_SUBTRACAO; }
+"."		{ countcolumn(); return OP_CONCATENACAO; }
+"++"		{ countcolumn(); return OP_INC; }
+"--"		{ countcolumn(); return OP_DEC; }
+
+"="		{ countcolumn(); return OP_IGUAL; }
+">"		{ countcolumn(); return OP_MAIORQUE; }
+">="	{ countcolumn(); return OP_MAIORIGUALQUE; }
+"<"		{ countcolumn(); return OP_MENORQUE; }
+"<="	{ countcolumn(); return OP_MENORIGUALQUE; }
+"!="	{ countcolumn(); return OP_DIFERENTE; }
+
+"and"	{ countcolumn(); return OP_AND; }
+"or"	{ countcolumn(); return OP_OR; }
+
+"integer"	{ countcolumn(); return TIPO; }
+"character"	{ countcolumn(); return TIPO; }
+"boolean"	{ countcolumn(); return TIPO; }
+"double"	{ countcolumn(); return TIPO; }
+"string"	{ countcolumn(); return TIPO; }
+[@][a-zA-Z_][a-zA-Z0-9_]*	{ countcolumn(); return TIPO; }
+
+"main"		{ countcolumn(); return MAIN; }
+"declare"	{ countcolumn(); return DECLARE; }
+"program"	{ countcolumn(); return PROGRAM; }
+"constant"	{ countcolumn(); return CONSTANT; }
+"produce"	{ countcolumn(); return PRODUCE; }
+"read"		{ countcolumn(); return READ; }
+"print"		{ countcolumn(); return PRINT; }
+"continue"		{ countcolumn(); return CONTINUE; }
+"break"	{ countcolumn(); return BREAK; }
+"exit"	{ countcolumn(); return EXIT; }
+
+"endfunction"	{ countcolumn(); return END_FUNCTION; }
+"function"	{ countcolumn(); return FUNCTION; }
+"procedure"	{ countcolumn(); return PROCEDURE; }
+"endprocedure"	{ countcolumn(); return END_PROCEDURE; }
+
+"if"		{ countcolumn(); return IF; }
+"then"		{ countcolumn(); return THEN; }
+"else"	{ countcolumn(); return ELSE; }
+"endif"		{ countcolumn(); return END_IF; }
+
+"while"		{ countcolumn(); return WHILE; }
+"endwhile"	{ countcolumn(); return END_WHILE; }
+"for"		{ countcolumn(); return FOR; }
+"endfor"	{ countcolumn(); return END_FOR; }
+
+[']([^\\'])[']		{ countcolumn(); return CARACTER; }
+("true"|"false")		{ countcolumn(); return BINARIO; }
+[a-zA-Z_][a-zA-Z0-9_]*	{ countcolumn(); return IDENTIFICADOR; }
+[-]?[0-9]+	{ countcolumn(); return NUMERO; }
+[-]?([0-9]+([.,][0-9]*)?|[.,][0-9]+)([Ee][+-]?[0-9]+)?		{ countcolumn(); return NUMERO; }
+[']([^\\']|\\([^0-7xX]|0|[0-7]{3}|[xX][0-9a-fA-F]{2}))*[']		{ countcolumn(); return TEXTO; }
+.			{ 
+				countcolumn(); 
+				char label[100];
+				char val[50];
+				char aux[50];
+				
+				strcpy(label, "Lexical error, invalid character founded: '");
+				strcpy(val, yytext);
+				strcpy(aux, "'");
+				strcpy(val, strcat(val, aux));
+				yyerror(strcat(label, val)); 
+			}
+			
+%%
+
+void countcolumn()
+{
+	int i;
+
+	for (i = 0; yytext[i] != '\0'; i++)
+		if (yytext[i] == '\n')
+			column = 0;
+		else if (yytext[i] == '\t')
+			column += 8 - (column % 8);
+		else
+			column++;
+} 
+
+void countline()
+{
+	line++;
+} 

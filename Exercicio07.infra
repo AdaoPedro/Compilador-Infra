@@ -1,0 +1,18 @@
+
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio07;
+
+declare constant pi: double:= 3.14159;
+procedure main()
+    declare area: double;
+    declare raio: double;
+
+    raio:= read();
+    
+    area:= (pi * (raio)*(raio));
+
+    print(area);
+endprocedure

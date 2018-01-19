@@ -1,0 +1,18 @@
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio10;
+
+procedure main()
+     declare primeiro: integer;
+     declare segundo: integer;
+     declare soma: integer;
+
+     primeiro:= read();
+     segundo:= read();
+
+     soma:= primeiro + segundo;
+
+     print(soma);
+endprocedure

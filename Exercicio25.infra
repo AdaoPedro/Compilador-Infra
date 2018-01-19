@@ -1,0 +1,20 @@
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio25;
+
+procedure main()
+     declare a, b: integer;
+     declare quociente, resto: double;
+
+     a:= read();
+     b:= read();
+
+     quociente:= a/b;
+     resto:= a module b;
+
+     print('Quociente: '.quociente);
+     print('Resto: '.resto);
+
+endprocedure

@@ -1,0 +1,22 @@
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio08;
+
+funcion soma(): integer
+
+endfunction
+
+procedure main()
+    declare area: double;
+    declare base: integer;
+    declare altura: double;
+
+    base:= read();
+    altura:= read();
+
+    area:= (base * altura)/2;
+
+    print(area);
+endprocedure

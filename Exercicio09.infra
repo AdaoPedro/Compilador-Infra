@@ -1,0 +1,15 @@
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio09;
+
+procedure main()
+     declare nome: string;
+     declare sobrenome: string;
+
+     nome:= read();
+     sobrenome:= read();
+    
+     print('O nome completo eh: '.nome.' '.sobrenome);
+endprocedure
