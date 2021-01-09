@@ -1,0 +1,18 @@
+program Voto;
+
+function testar(idade: integer): boolean
+     declare votar: boolean:= true;
+     if(idade < 18) then
+         votar:= false;
+     endif
+
+     produce votar;
+endfunction
+
+procedure main()
+     declare idade: integer;
+     print('Digite a sua idade: ');
+     idade:= read();
+
+     print(testar(idade));
+endprocedure

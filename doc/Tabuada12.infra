@@ -1,0 +1,12 @@
+program Tabuada12;
+
+procedure main()
+     declare j,i : integer;
+
+     for( i:= 1; i < 12; i++ )
+         for( j:= 1; j <= 12; j++)
+             declare aux: double:= i*j;
+             print(i.'x'.j.'='.aux);
+         endfor
+     endfor
+endprocedure

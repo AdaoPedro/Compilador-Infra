@@ -1,0 +1,5 @@
+program cadastro;
+
+procedure main()
+     print('Hello world!..');
+endprocedure

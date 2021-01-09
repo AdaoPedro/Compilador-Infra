@@ -1,0 +1,23 @@
+program ProgramaSoma;
+
+//variaveis globais
+      declare mensagem: string;
+      
+procedure main()
+      declare nota1, nota2: integer;
+      declare media: double;
+      //entrada      
+      print('Digite a primeira nota: ');
+      nota1:= read();
+      print('Digite a segunda nota: ');
+      nota2:= read();
+      //processamento
+      media:= (nota1 + nota2)/2;
+      if (media > 9.5) then
+           mensagem:= 'O formando está apto com media '.media;
+      else
+           mensagem:= 'O formando está reprovado com media '.media;
+      endif
+      //saída
+      print(mensagem(12,3));  
+endprocedure

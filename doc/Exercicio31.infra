@@ -1,0 +1,23 @@
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio31;
+
+procedure main()
+    declare A, B: integer;
+
+    A:= read();
+    B:= read();
+
+    if (A > B) then
+        print(A.' eh maior.');
+    else
+       if(B > A) then
+           print(B.' eh maior.');
+       else
+           print('Ambos sao iguais');
+       endif
+    endif
+
+endprocedure

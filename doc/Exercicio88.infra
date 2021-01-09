@@ -1,0 +1,14 @@
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio88;
+
+procedure main()
+     declare contador: integer;
+     declare soma: integer:= 0;
+
+     for(contador:=1; contador<=100; contador++)
+          soma:= soma+contador;
+     endfor
+endprocedure

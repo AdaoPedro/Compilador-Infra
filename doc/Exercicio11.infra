@@ -1,0 +1,23 @@
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio11;
+
+procedure main()
+     declare HT, VT, PD: double;
+
+     HT:= read();
+     VT:= read(); 
+     PD:= read();    
+
+     declare SB: double:= HT * VT;
+     declare TD: double:= (PD/100)*SB;
+     declare SL: double:= SB-TD;
+
+     print('-Horas trabalhadas: '.HT);
+     print('-Salario bruto: '.SB);
+     print('-Desconto: '.TD);
+     print('-Salario liquido: '.SL);
+     
+endprocedure

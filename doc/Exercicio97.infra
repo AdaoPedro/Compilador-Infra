@@ -1,0 +1,19 @@
+//Autor: Adão Pedro
+//Data: 20 Dez. 2017
+//Enunciado: <ver Exercicios de Algoritmos.pdf>
+
+program Exercicio97;
+
+procedure main()
+     declare numero: integer;
+     numero:= read();
+     declare i: integer;
+
+     i:= 1;
+     while(i<=13)
+         declare aux: integer:= i*numero;
+         print(i.' x '.numero.' = '.aux);
+     endwhile
+     
+     
+endprocedure

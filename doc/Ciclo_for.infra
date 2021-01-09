@@ -1,0 +1,12 @@
+program Tabuada12;
+
+procedure main()
+     declare soma : integer:= 0;
+     declare j : integer;
+
+     for( declare i : integer := 1; i < 19; ++i )
+         for(j := 19; j >= 1; j--)
+             soma := i * j;
+         endfor
+     endfor
+endprocedure
